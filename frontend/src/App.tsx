@@ -1,5 +1,9 @@
+import AuthModal from './components/AuthModal'
+import { useGeneralStore } from './stores/generalStore'
+
 function App() {
-  return <h1 className="text-3xl font-bold">Hello world!</h1>
+  const isLoginOpen = useGeneralStore((state) => state.isLoginOpen)
+  return <>{isLoginOpen && <AuthModal />}</>
 }
 
 export default App

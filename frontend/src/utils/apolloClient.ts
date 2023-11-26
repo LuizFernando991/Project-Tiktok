@@ -14,16 +14,14 @@ async function refreshToken(client: ApolloClient<NormalizedCacheObject>) {
     const { data } = await client.mutate({
       mutation: gql`
         mutation RefreshToken {
-          accessToken
+          refreshToken
         }
       `
     })
-
-    const newAccessToken = data?.accessToken
+    const newAccessToken = data?.refreshToken
 
     if (!newAccessToken) throw new Error('New access token not received.')
 
-    localStorage.setItem('accessToken', newAccessToken)
     return `Bearer ${newAccessToken}`
   } catch (err) {
     throw new Error('Error getting new access token')
@@ -31,7 +29,7 @@ async function refreshToken(client: ApolloClient<NormalizedCacheObject>) {
 }
 
 let retryCount = 0
-const maxRetry = 3
+const maxRetry = 1
 
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors) {
@@ -51,8 +49,20 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
               const forward$ = forward(operation)
               forward$.subscribe(observer)
             })
-            .catch((err) => observer.error(err))
+            .catch((err) => {
+              observer.error(err)
+            })
         })
+      } else if (err.extensions.code === 'UNAUTHENTICATED') {
+        localStorage.removeItem('user-storage')
+        client.mutate({
+          mutation: gql`
+            mutation LogoutUser {
+              logout
+            }
+          `
+        })
+        window.location.reload()
       }
     }
   }

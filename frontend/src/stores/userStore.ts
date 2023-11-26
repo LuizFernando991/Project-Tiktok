@@ -11,10 +11,11 @@ export interface User {
 
 export interface UserActions {
   setUser: (user: User) => void
+  resetUser: () => void
   logout: () => void
 }
 
-export const useUseStore = create<User & UserActions>()(
+export const useUserStore = create<User & UserActions>()(
   devtools(
     persist(
       (set) => ({
@@ -24,6 +25,14 @@ export const useUseStore = create<User & UserActions>()(
         bio: '',
         image: '',
         setUser: (user) => set(user),
+        resetUser: () =>
+          set({
+            id: undefined,
+            name: '',
+            email: '',
+            bio: '',
+            image: ''
+          }),
         logout: () => {
           set({
             id: undefined,
