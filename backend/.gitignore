@@ -18,7 +18,7 @@ lerna-debug.log*
 .env
 
 # Public Files
-/public/files/**
+/public/files/*
 
 # Tests
 /coverage
