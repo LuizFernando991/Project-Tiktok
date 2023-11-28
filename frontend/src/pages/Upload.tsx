@@ -1,5 +1,4 @@
 import { FC, useState, useRef, ChangeEvent, DragEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
 import UploadLayout from '../layouts/UploadLayout'
 import { FiUploadCloud } from 'react-icons/fi'
 import { IoCheckmarkDoneCircleOutline } from 'react-icons/io5'
@@ -10,7 +9,6 @@ import { CREATE_POST } from '../graphql/mutations/CreatePost'
 
 const Upload: FC = () => {
   const fileRef = useRef<HTMLInputElement>(null)
-  const navigate = useNavigate()
   const [fileData, setFileData] = useState<File | null>(null)
   const [fileDisplay, setFileDisplay] = useState<string | null>(null)
   const [errorType, setErrorType] = useState<string | null>(null)
@@ -56,7 +54,7 @@ const Upload: FC = () => {
     try {
       await createPost()
       clearVideo()
-      navigate('/')
+      window.location.replace('/')
     } catch (_) {
       //
     }

@@ -57,7 +57,7 @@ function Feed() {
 
   return (
     <MainLayout>
-      <div className="pt-[80px] w-[calc(100%-90px)] max-w-[690px] ">
+      <div className="pt-[80px] w-full pl-2 md:pl-0 md:w-[calc(100%-90px)] max-w-[690px] ">
         {data?.getPosts.map((post: PostType, index: number) => (
           <PostFeed key={index} post={post} />
         ))}
