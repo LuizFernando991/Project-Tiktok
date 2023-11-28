@@ -15,9 +15,9 @@ first open the backend folder and:
 ```
 2 - Run the command ```npm install``` to install the dependencies
 
-3 - Run the command ```npx prisma generate``` to update db collections
+3 - Run the command ```npx prisma generate``` to update db
 
-4 - Run the command ```npx prisma migrate dev``` to update seeds on db
+4 - Run the command ```npx prisma migrate dev``` to update db
 
 5 - Run the command ```npm run start:dev``` to run local server
 
