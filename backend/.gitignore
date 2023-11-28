@@ -19,6 +19,7 @@ lerna-debug.log*
 
 # Public Files
 /public/files/**.mp4
+/public/files/**.jpg
 
 # Tests
 /coverage

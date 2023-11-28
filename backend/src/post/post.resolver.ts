@@ -28,7 +28,7 @@ export class PostResolver {
   }
 
   @Query(() => PostDetails)
-  async getPostById(@Args('id') id: number) {
+  async getPostById(@Args('id', { type: () => Int }) id: number) {
     return await this.postService.getPostById(id)
   }
 
@@ -41,7 +41,7 @@ export class PostResolver {
   }
 
   @Query(() => [PostType])
-  async getPostsByUserId(@Args('userId') userId: number) {
+  async getPostsByUserId(@Args('userId', { type: () => Int }) userId: number) {
     return await this.postService.getPostsByUserId(userId)
   }
 

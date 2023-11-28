@@ -2,6 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Comment {
+  createdAt: DateTime!
+  id: Int!
+  post: PostType!
+  text: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -29,12 +38,17 @@ type LoginResponse {
 }
 
 type Mutation {
+  createComment(postId: Int!, text: String!): Comment!
   createPost(text: String!, video: Upload!): PostType!
+  deleteComment(id: Int!): Comment!
   deletePost(id: Int!): PostType!
+  likePost(postId: Int!): LikeType!
   login(loginInput: LoginDto!): LoginResponse!
   logout: String!
   refreshToken: String!
   register(registerInput: RegisterDto!): RegisterResponse!
+  unlikePost(postId: Int!): LikeType!
+  updateUserProfile(bio: String, image: Upload, name: String): User!
 }
 
 type PostDetails {
@@ -57,9 +71,10 @@ type PostType {
 }
 
 type Query {
-  getPostById(id: Float!): PostDetails!
+  getCommentsByPostId(postId: Int!): [Comment!]!
+  getPostById(id: Int!): PostDetails!
   getPosts(skip: Int! = 0, take: Int! = 10): [PostType!]!
-  getPostsByUserId(userId: Float!): [PostType!]!
+  getPostsByUserId(userId: Int!): [PostType!]!
   getUsers(take: Int!): [User!]!
 }
 

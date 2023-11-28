@@ -14,4 +14,18 @@ export class UserService {
       take: limit
     })
   }
+
+  async updateProfile(
+    userId: number,
+    data: { name?: string; bio?: string; image?: string }
+  ) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        name: data.name,
+        bio: data.bio,
+        image: data.image
+      }
+    })
+  }
 }

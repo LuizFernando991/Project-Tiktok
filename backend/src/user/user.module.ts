@@ -3,11 +3,12 @@ import { UserService } from './user.service'
 import { UserResolver } from './user.resolver'
 
 import { AuthModule } from 'src/auth/auth.module'
-import { PrismaModule } from 'src/prisma/prisma.module'
+import { ConfigModule } from '@nestjs/config'
+import { JwtService } from '@nestjs/jwt'
 
 @Module({
-  imports: [AuthModule, PrismaModule],
-  providers: [UserService, UserResolver],
+  imports: [ConfigModule, AuthModule],
+  providers: [UserService, UserResolver, JwtService],
   exports: [UserService]
 })
 export class UserModule {}

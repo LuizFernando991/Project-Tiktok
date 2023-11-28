@@ -5,8 +5,11 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { join } from 'path'
 import { ConfigModule } from '@nestjs/config'
-import { PostModule } from './post/post.module';
-import { LikeModule } from './like/like.module';
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { PostModule } from './post/post.module'
+import { LikeModule } from './like/like.module'
+import { CommentModule } from './comment/comment.module'
+import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
@@ -17,11 +20,17 @@ import { LikeModule } from './like/like.module';
       playground: true,
       context: ({ req, res }) => ({ req, res })
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/'
+    }),
     ConfigModule.forRoot({}),
     AuthModule,
     UserModule,
     PostModule,
-    LikeModule
+    LikeModule,
+    PrismaModule,
+    CommentModule
   ],
   controllers: [],
   providers: []
