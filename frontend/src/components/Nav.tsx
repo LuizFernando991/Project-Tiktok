@@ -100,53 +100,59 @@ const Nav: FC = () => {
               >
                 <span className="mx-4 font-medium text-[15px]">Log In</span>
               </button>
-              <BsThreeDotsVertical size="25" color="#161724" />
+              {user.id && <BsThreeDotsVertical size="25" color="#161724" />}
             </div>
           )}
-          <div className="flex items-center justify-between gap-[10px]">
-            <BsFillSendFill size="25" color="#161724" />
-            <BiMessageDetail size="25" color="#161724" />
-            <div className="relative">
-              <button className="mt-1" onClick={() => setShowMenu(!showMenu)}>
-                <img
-                  className="rounded-full"
-                  width="33"
-                  src={
-                    !user.image
-                      ? 'https://picsum.photos/id/83/300/320'
-                      : `${import.meta.env.VITE_PUBLIC_FOLDER_URL}${user.image}`
-                  }
-                />
-              </button>
-              {showMenu && (
-                <div
-                  id="PopupMenu"
-                  className="absolute bg-white rounded-lg py-1.5 w-[200px] shadow-xl border top-[43px] -right-2"
-                >
-                  <Link
-                    onClick={() => setShowMenu(!showMenu)}
-                    to={'/profile/' + user.id}
-                    className="flex px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          {user.id && (
+            <div className="flex items-center justify-between gap-[10px]">
+              <BsFillSendFill size="25" color="#161724" />
+              <BiMessageDetail size="25" color="#161724" />
+              <div className="relative">
+                <button className="mt-1" onClick={() => setShowMenu(!showMenu)}>
+                  <img
+                    className="rounded-full"
+                    width="33"
+                    src={
+                      !user.image
+                        ? 'https://picsum.photos/id/83/300/320'
+                        : `${import.meta.env.VITE_PUBLIC_FOLDER_URL}${
+                            user.image
+                          }`
+                    }
+                  />
+                </button>
+                {showMenu && (
+                  <div
+                    id="PopupMenu"
+                    className="absolute bg-white rounded-lg py-1.5 w-[200px] shadow-xl border top-[43px] -right-2"
                   >
-                    {' '}
-                    <BsFillPersonFill size="20" color="#161724" />
-                    <span className="ml-2 font-semibold text-sm">Profile</span>
-                  </Link>
-                  {user.id && (
-                    <div
-                      onClick={handleLogout}
-                      className="block cursor-pointer flex px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    <Link
+                      onClick={() => setShowMenu(!showMenu)}
+                      to={'/profile/' + user.id}
+                      className="flex px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     >
-                      <GrLogout size="20" color="#161724" />
+                      {' '}
+                      <BsFillPersonFill size="20" color="#161724" />
                       <span className="ml-2 font-semibold text-sm">
-                        Log out
+                        Profile
                       </span>
-                    </div>
-                  )}
-                </div>
-              )}
+                    </Link>
+                    {user.id && (
+                      <div
+                        onClick={handleLogout}
+                        className="block cursor-pointer flex px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        <GrLogout size="20" color="#161724" />
+                        <span className="ml-2 font-semibold text-sm">
+                          Log out
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -15,6 +15,12 @@ export class UserService {
     })
   }
 
+  async getUserById(id: number): Promise<User> {
+    return this.prisma.user.findUnique({
+      where: { id }
+    })
+  }
+
   async updateProfile(
     userId: number,
     data: { name?: string; bio?: string; image?: string }

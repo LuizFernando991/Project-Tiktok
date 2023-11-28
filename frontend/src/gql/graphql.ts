@@ -148,6 +148,7 @@ export type Query = {
   getPostById: PostDetails;
   getPosts: Array<PostType>;
   getPostsByUserId: Array<PostType>;
+  getUserById: User;
   getUsers: Array<User>;
 };
 
@@ -170,6 +171,11 @@ export type QueryGetPostsArgs = {
 
 export type QueryGetPostsByUserIdArgs = {
   userId: Scalars['Int']['input'];
+};
+
+
+export type QueryGetUserByIdArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -457,6 +463,7 @@ export type Query = {
   getPostById: PostDetails;
   getPosts: Array<PostType>;
   getPostsByUserId: Array<PostType>;
+  getUserById: User;
   getUsers: Array<User>;
 };
 
@@ -479,6 +486,11 @@ export type QueryGetPostsArgs = {
 
 export type QueryGetPostsByUserIdArgs = {
   userId: Scalars['Int']['input'];
+};
+
+
+export type QueryGetUserByIdArgs = {
+  id: Scalars['Int']['input'];
 };
 
 

@@ -8,8 +8,14 @@ import { useParams } from 'react-router-dom'
 import { useUserStore } from '../stores/userStore'
 import { useGeneralStore } from '../stores/generalStore'
 import { PostType } from '../gql/graphql'
+import { GET_USER_BY_ID } from '../graphql/queries/GetUserById'
 const Profile = () => {
   const { id } = useParams<{ id: string }>()
+  const { data: profileUserData } = useQuery(GET_USER_BY_ID, {
+    variables: {
+      id: Number(id)
+    }
+  })
   const { data } = useQuery(GET_POSTS_BY_USER_ID, {
     variables: {
       userId: Number(id)
@@ -26,9 +32,10 @@ const Profile = () => {
           <img
             className="w-[100]  h-[100px] rounded-full object-cover"
             src={
-              !user.image
+              !profileUserData?.getUserById.image
                 ? 'https://picsum.photos/id/83/300/320'
-                : `${import.meta.env.VITE_PUBLIC_FOLDER_URL}${user.image}`
+                : `${import.meta.env.VITE_PUBLIC_FOLDER_URL}${profileUserData
+                    ?.getUserById.image}`
             }
           />
           <div className="ml-5 w-full">

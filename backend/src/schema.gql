@@ -75,6 +75,7 @@ type Query {
   getPostById(id: Int!): PostDetails!
   getPosts(skip: Int! = 0, take: Int! = 10): [PostType!]!
   getPostsByUserId(userId: Int!): [PostType!]!
+  getUserById(id: Int!): User!
   getUsers(take: Int!): [User!]!
 }
 
