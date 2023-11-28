@@ -111,9 +111,11 @@ const PostFeed: FC<PostFeedPropsType> = ({ post }) => {
                 <IoIosShareAlt size="25" color="black" />
               </button>
               <span className="text-xs text-gray-800 font-semibold">34</span>
-              <button className="rounded-full bg-gray-200 p-2 cursor-pointer">
-                <IoChatboxEllipses size="25" color="black" />
-              </button>
+              <Link to={`/post/${post.id}`}>
+                <button className="rounded-full bg-gray-200 p-2 cursor-pointer">
+                  <IoChatboxEllipses size="25" color="black" />
+                </button>
+              </Link>
               <span className="text-xs text-gray-800 font-semibold">40</span>
             </div>
           </div>
