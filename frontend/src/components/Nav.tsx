@@ -114,7 +114,7 @@ const Nav: FC = () => {
                   src={
                     !user.image
                       ? 'https://picsum.photos/id/83/300/320'
-                      : user.image
+                      : `${import.meta.env.VITE_PUBLIC_FOLDER_URL}${user.image}`
                   }
                 />
               </button>

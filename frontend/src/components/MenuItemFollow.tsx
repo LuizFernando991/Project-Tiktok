@@ -14,7 +14,11 @@ const MenuItemFollow: FC<MenuItemFollowPropsType> = ({ user }) => {
         <img
           className="rounded-full lg:mx-0 mx-auto"
           width="35"
-          src={user?.image ? user.image : 'https://picsum.photos/id/83/300/320'}
+          src={
+            user?.image
+              ? `${import.meta.env.VITE_PUBLIC_FOLDER_URL}${user.image}`
+              : 'https://picsum.photos/id/83/300/320'
+          }
         />
         <div className="lg:pl-2.5 lg:block hidden">
           <div className="flex items-center">

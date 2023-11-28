@@ -19,9 +19,11 @@ const MainLayout: FC<MainLayoutPropsType> = ({ children }) => {
           'flex justify-between mx-auto w-full lg:px-2.5 px-0'
         ].join(' ')}
       >
-        <SideNav />
+        <div className="hidden md:block">
+          <SideNav />
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   )
 }

@@ -1,4 +1,5 @@
-import { FC, useState, useEffect, useRef, ChangeEvent, DragEvent } from 'react'
+import { FC, useState, useRef, ChangeEvent, DragEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import UploadLayout from '../layouts/UploadLayout'
 import { FiUploadCloud } from 'react-icons/fi'
 import { IoCheckmarkDoneCircleOutline } from 'react-icons/io5'
@@ -9,18 +10,12 @@ import { CREATE_POST } from '../graphql/mutations/CreatePost'
 
 const Upload: FC = () => {
   const fileRef = useRef<HTMLInputElement>(null)
-  const [show, setShow] = useState(false)
+  const navigate = useNavigate()
   const [fileData, setFileData] = useState<File | null>(null)
   const [fileDisplay, setFileDisplay] = useState<string | null>(null)
-  const [errors, setErros] = useState<string[]>([])
   const [errorType, setErrorType] = useState<string | null>(null)
-  const [isUploading, setIsUploading] = useState(false)
   const [caption, setCaption] = useState<string>('')
-  const [createPost, { loading }] = useMutation(CREATE_POST, {
-    onError: (err) => {
-      console.log(err)
-      setErros(err.graphQLErrors[0]?.extensions?.errors as string[])
-    },
+  const [createPost] = useMutation(CREATE_POST, {
     variables: {
       text: caption,
       video: fileData
@@ -59,14 +54,11 @@ const Upload: FC = () => {
 
   const handleCreatePost = async () => {
     try {
-      setIsUploading(true)
       await createPost()
-      setShow(true)
       clearVideo()
+      navigate('/')
     } catch (_) {
       //
-    } finally {
-      setIsUploading(false)
     }
   }
 
